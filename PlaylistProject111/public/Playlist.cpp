@@ -1,54 +1,61 @@
 #include "Playlist.h"
-#include "Song.h"
 #include <iostream>
-
-using namespace std;
 
 Playlist::Playlist() : title("Untitled") {}
 
-Playlist::Playlist(string title) : title(title) {}
+Playlist::Playlist(std::string title) : title(title) {}
 
-void Playlist::addSong(const Song &song)
+void Playlist::addSong(Song &&song)
 {
-    songs.push_back(song);
+    songs.push_back(std::move(song));
 }
 
-void Playlist::removeSong(const string &songTitle)
+void Playlist::removeSong(const std::string &songTitle)
 {
-    // Iterate through the songs and find the one with the given title
     for (size_t i = 0; i < songs.size(); ++i)
     {
         if (songs[i].getTitle() == songTitle)
         {
-            songs.erase(songs.begin() + i); // Remove the song from the vector
-            cout << "Song removed: " << songTitle << endl;
+            songs.erase(songs.begin() + i);
+            std::cout << "Song removed: " << songTitle << std::endl;
             return;
         }
     }
-    cout << "Song not found!" << endl;
+    std::cout << "Song not found!" << std::endl;
 }
 
 void Playlist::viewSongs() const
 {
     if (songs.empty())
     {
-        cout << "No songs in this playlist." << endl;
+        std::cout << "No songs in this playlist." << std::endl;
         return;
     }
 
-    // Iterate over the songs and display each one
-    for (size_t i = 0; i < songs.size(); ++i)
+    for (const auto &song : songs)
     {
-        cout << songs[i].getTitle() << " by " << songs[i].getArtist() << endl;
+        std::cout << song.getTitle() << " by " << song.getArtist() << std::endl;
     }
 }
 
-string Playlist::getTitle() const
+std::string Playlist::getTitle() const
 {
     return title;
 }
 
-void Playlist::setTitle(const string &title)
+void Playlist::setTitle(const std::string &title)
 {
     this->title = title;
+}
+
+Song *Playlist::getSongByTitle(const std::string &title)
+{
+    for (auto &song : songs)
+    {
+        if (song.getTitle() == title)
+        {
+            return &song;
+        }
+    }
+    return nullptr;
 }

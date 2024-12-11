@@ -25,26 +25,25 @@ public:
 
 // TODO need to rewrite these operators at some point
 
-
-//bool operator==(const Node &lhs, const Node &rhs);
-//bool operator!=(const Node &lhs, const Node &rhs);
-//bool operator<(const Node &lhs, const Node &rhs);
-//bool operator>(const Node &lhs, const Node &rhs);
-//bool operator<=(const Node &lhs, const Node &rhs);
-//bool operator>=(const Node &lhs, const Node &rhs);
+// bool operator==(const Node &lhs, const Node &rhs);
+// bool operator!=(const Node &lhs, const Node &rhs);
+// bool operator<(const Node &lhs, const Node &rhs);
+// bool operator>(const Node &lhs, const Node &rhs);
+// bool operator<=(const Node &lhs, const Node &rhs);
+// bool operator>=(const Node &lhs, const Node &rhs);
 //
-//bool operator==(const Node &lhs, const string &rhs);
-//bool operator!=(const Node &lhs, const string &rhs);
-//bool operator<(const Node &lhs, const string &rhs);
-//bool operator>(const Node &lhs, const string &rhs);
-//bool operator<=(const Node &lhs, const string &rhs);
-//bool operator>=(const Node &lhs, const string &rhs);
+// bool operator==(const Node &lhs, const string &rhs);
+// bool operator!=(const Node &lhs, const string &rhs);
+// bool operator<(const Node &lhs, const string &rhs);
+// bool operator>(const Node &lhs, const string &rhs);
+// bool operator<=(const Node &lhs, const string &rhs);
+// bool operator>=(const Node &lhs, const string &rhs);
 //
-//bool operator==(const string &lhs, const Node &rhs);
-//bool operator!=(const string &lhs, const Node &rhs);
-//bool operator<(const string &lhs, const Node &rhs);
-//bool operator>(const string &lhs, const Node &rhs);
-//bool operator<=(const string &lhs, const Node &rhs);
-//bool operator>=(const string &lhs, const Node &rhs);
+// bool operator==(const string &lhs, const Node &rhs);
+// bool operator!=(const string &lhs, const Node &rhs);
+// bool operator<(const string &lhs, const Node &rhs);
+// bool operator>(const string &lhs, const Node &rhs);
+// bool operator<=(const string &lhs, const Node &rhs);
+// bool operator>=(const string &lhs, const Node &rhs);
 
-#endif node.h
+#endif

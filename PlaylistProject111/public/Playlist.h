@@ -2,6 +2,7 @@
 #define PLAYLIST_H
 
 #include <vector>
+#include <string>
 #include "Song.h"
 
 class Playlist
@@ -14,12 +15,12 @@ public:
     Playlist();
     Playlist(std::string title);
 
-    void addSong(const Song &song);
+    void addSong(Song &&song);
     void removeSong(const std::string &songTitle);
     void viewSongs() const;
-
     std::string getTitle() const;
     void setTitle(const std::string &title);
+    Song *getSongByTitle(const std::string &title);
 };
 
 #endif

@@ -26,6 +26,13 @@ void SystemDriver::run()
         cout << "0. Exit\n";
         cout << "Choose an option: ";
         cin >> roleChoice;
+        while (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter an integer: ";
+            cin >> roleChoice;
+        }
         cin.ignore(); // To ignore the leftover newline character
 
         switch (roleChoice)
@@ -67,6 +74,7 @@ void SystemDriver::signInAsCreator()
 void SystemDriver::showUserMenu(vector<Playlist> &playlists)
 {
     int choice;
+
     do
     {
         cout << "\nUser Menu:\n";
@@ -75,6 +83,13 @@ void SystemDriver::showUserMenu(vector<Playlist> &playlists)
         cout << "0. Logout\n";
         cout << "Choose an option: ";
         cin >> choice;
+        while (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter an integer: ";
+            cin >> choice;
+        }
         cin.ignore();
 
         switch (choice)
@@ -152,6 +167,13 @@ void SystemDriver::createPlaylist(vector<Playlist> &playlists)
         cout << "0. Return to User Menu\n";
         cout << "Choose an option: ";
         cin >> addChoice;
+        while (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter an integer: ";
+            cin >> addChoice;
+        }
 
         if (addChoice == 1)
         {
@@ -190,18 +212,19 @@ void SystemDriver::viewPlaylists(vector<Playlist> &playlists)
     }
 }
 
-// Function to add a song to a playlist
 void SystemDriver::addSongToPlaylist(Playlist &playlist)
 {
-    string songTitle, artist;
+    string songTitle, artist, filePath;
     cout << "Enter the song title: ";
     cin.ignore();
     getline(cin, songTitle);
     cout << "Enter the artist: ";
     getline(cin, artist);
+    cout << "Enter the file path to the song: ";
+    getline(cin, filePath);
 
-    Song newSong(songTitle, artist);
-    playlist.addSong(newSong); // Add song to the playlist
+    Song newSong(songTitle, artist, filePath);
+    playlist.addSong(std::move(newSong));
 
     cout << "Song '" << songTitle << "' by " << artist << " added to the playlist.\n";
 }
@@ -210,14 +233,21 @@ void SystemDriver::addSongToPlaylist(Playlist &playlist)
 void SystemDriver::viewSongsInPlaylist(Playlist &playlist)
 {
     cout << "\nSongs in playlist '" << playlist.getTitle() << "':\n";
-    playlist.viewSongs(); // Display the songs in the selected playlist
+    playlist.viewSongs();
 
-    // Now allow the user to remove a song while viewing the playlist
     int choice;
     cout << "\n1. Remove a song\n";
+    cout << "2. Play a song\n";
     cout << "0. Return to User Menu\n";
     cout << "Choose an option: ";
     cin >> choice;
+    while (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input. Please enter an integer: ";
+        cin >> choice;
+    }
 
     if (choice == 1)
     {
@@ -226,7 +256,24 @@ void SystemDriver::viewSongsInPlaylist(Playlist &playlist)
         cin.ignore();
         getline(cin, songTitle);
 
-        playlist.removeSong(songTitle); // Remove the song from the playlist
+        playlist.removeSong(songTitle);
+    }
+    else if (choice == 2)
+    {
+        string songTitle;
+        cout << "Enter the title of the song you want to play: ";
+        cin.ignore();
+        getline(cin, songTitle);
+
+        Song *songToPlay = playlist.getSongByTitle(songTitle);
+        if (songToPlay)
+        {
+            songToPlay->play();
+        }
+        else
+        {
+            cout << "Song not found in this playlist." << endl;
+        }
     }
 }
 
